@@ -4,7 +4,7 @@
  *
  * Return: Always 0 (Success)
  */
-main(void)
+int main(void)
 {
 	/* print a string to the output */
 	printf("with proper grammar, but the outcome is a piece of art,\n");
