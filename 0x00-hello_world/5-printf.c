@@ -2,10 +2,11 @@
 /**
  * main - Entry point of the program
  *
- * return: 0 when successful otherwise failure
+ * Return: Always 0 (Success)
  */
-int main(void)
+main(void)
 {
+	/* print a string to the output */
 	printf("with proper grammar, but the outcome is a piece of art,\n");
 	return (0);
 }
