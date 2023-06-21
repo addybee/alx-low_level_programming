@@ -17,28 +17,34 @@ void times_table(void)
 			{
 				if ((a / 10) != 0)
 				{
-					_putchar('0' + (a / 10));
-					_putchar('0' + (a % 10));
+					_putchar((a / 10) + '0');
+					_putchar((a % 10) + '0');
 				}
 				else
 				{
 					_putchar(32);
-					_putchar('0' + (a % 10));
+					_putchar((a % 10) + '0');
 				}
+			}
+			else if (k == 0)
+			{
+				_putchar((a % 10) + '0');
+				_putchar(44);
+				_putchar(32);
 			}
 			else
 			{
 				if ((a / 10) != 0)
 				{
-					_putchar('0' + (a / 10));
-					_putchar('0' + (a % 10));
+					_putchar((a / 10) + '0');
+					_putchar((a % 10) + '0');
 					_putchar(44);
 					_putchar(32);
 				}
 				else
 				{
 					_putchar(32);
-					_putchar('0' + (a % 10));
+					_putchar((a % 10) + '0');
 					_putchar(44);
 					_putchar(32);
 				}
