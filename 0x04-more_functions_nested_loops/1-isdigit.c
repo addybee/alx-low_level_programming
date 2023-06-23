@@ -7,11 +7,12 @@
 int _isdigit(int c)
 {
 	char i;
+/*	char di[12] = "0123456789";*/
 
-	for (i = "0"; i < "10"; i++)
+	for (i = '0'; i <= '9'; i++)
 	{
 		if (c == i)
-			return(1);
+			return (1);
 	}
 	return (0);
 }

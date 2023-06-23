@@ -3,3 +3,7 @@
 0x02-functions_nested_loops/*main.c
 0x02-functions_nested_loops/*.swp
 0x02-functions_nested_loops/a.out
+0x04-more_functions_nested_loops/_*.c
+0x04-more_functions_nested_loops/*.swp
+0x04-more_functions_nested_loops/*main.c
+0x04-more_functions_nested_loops/*.out
