@@ -14,20 +14,19 @@ int main(void)
 		S = i % 10;
 		for (j = 0; j < 100; j++)
 		{
-i			K = j / 10;
+			K = j / 10;
 			L = j % 10;
-			if (i == j)
+			if (i >= j)
 				continue;
 			putchar('0' + F);
 			putchar('0' + S);
 			putchar(' ');
 			putchar('0' + K);
 			putchar('0' + L);
-			if (i != 98 && j != 99)
-			{
-				putchar(',');
-				putchar(' ');
-			}
+			if ((i == 98) && (j == 99))
+				continue;
+			putchar(',');
+			putchar(' ');
 		}
 	}
 	putchar('\n');
