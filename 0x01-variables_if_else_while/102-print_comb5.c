@@ -14,7 +14,7 @@ int main(void)
 		S = i % 10;
 		for (j = 0; j < 100; j++)
 		{
-			K = j / 10;
+i			K = j / 10;
 			L = j % 10;
 			if (i == j)
 				continue;
@@ -23,7 +23,7 @@ int main(void)
 			putchar(' ');
 			putchar('0' + K);
 			putchar('0' + L);
-			if (j != 99)
+			if (i != 98 && j != 99)
 			{
 				putchar(',');
 				putchar(' ');
