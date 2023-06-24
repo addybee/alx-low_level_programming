@@ -1,5 +1,5 @@
 #include <stdio.h>
-int is_prime(int n);
+int is_prime(long int n);
 /**
  * main - check the code
  *
@@ -7,12 +7,11 @@ int is_prime(int n);
  */
 int main(void)
 {
-	long i;
-	long q, high;
+	long int i, q, high;
 
 	q = 612852475143;
 	high = 0;
-	for (i = 2; i <= q; i++)
+	for (i = 3; i <= q; i += 2)
 	{
 		while (is_prime(i) && ((q % i) == 0))
 		{
@@ -20,7 +19,7 @@ int main(void)
 			q /= i;
 		}
 	}
-	printf("%d\n", high);
+	printf("%ld\n", high);
 	return (0);
 }
 /**
@@ -28,9 +27,9 @@ int main(void)
  * @n: long integer
  * Return: long
  */
-int is_prime(long n)
+int is_prime(long int n)
 {
-	int i;
+	long int i;
 
 	if (n < 0)
 		return (0);
