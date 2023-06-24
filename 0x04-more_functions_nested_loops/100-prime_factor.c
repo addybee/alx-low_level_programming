@@ -7,13 +7,12 @@ int is_prime(int n);
  */
 int main(void)
 {
-	int i;
-	long q;
-	int high;
+	long i;
+	long q, high;
 
 	q = 612852475143;
 	high = 0;
-	for (i= 2; (i * i) <= q; i++)
+	for (i = 2; i <= q; i++)
 	{
 		while (is_prime(i) && ((q % i) == 0))
 		{
@@ -24,10 +23,15 @@ int main(void)
 	printf("%d\n", high);
 	return (0);
 }
-int is_prime(int n)
+/**
+ * is_prime - checks if a number is prime
+ * @n: long integer
+ * Return: long
+ */
+int is_prime(long n)
 {
 	int i;
-	
+
 	if (n < 0)
 		return (0);
 	if (n <= 3)
