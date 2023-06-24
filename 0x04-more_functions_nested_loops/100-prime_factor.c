@@ -11,7 +11,7 @@ int main(void)
 
 	q = 612852475143;
 	high = 0;
-	for (i = 3; i <= q; i += 2)
+	for (i = 3; i <= q; i += 1)
 	{
 		while (is_prime(i) && ((q % i) == 0))
 		{
