@@ -6,4 +6,8 @@
 0x04-more_functions_nested_loops/_*.c
 0x04-more_functions_nested_loops/*.swp
 0x04-more_functions_nested_loops/*main.c
-0x04-more_functions_nested_loops/*.out
+0x04-more_functions_nested_loops/a.out
+0x05-pointers_arrays_strings/_*.c
+0x05-pointers_arrays_strings/*.swp
+0x05-pointers_arrays_strings/*main.c
+0x05-pointers_arrays_strings/a.out
