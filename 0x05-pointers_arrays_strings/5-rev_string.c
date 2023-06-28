@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "main.h"
 /**
  * rev_string - string is reverse
@@ -7,7 +8,7 @@
 void rev_string(char *s)
 {
 	int len, j;
-	char p[10];
+	char p[256];
 
 	len = 0;
 	j = 0;
@@ -16,10 +17,6 @@ void rev_string(char *s)
 		p[len] = s[len];
 		len++;
 	}
-	while ((len) >= 0)
-	{
-		s[len] = p[j];
-		len--;
-		j++;
-	}
+	while (p[j])
+		s[--len] = p[j++];
 }
