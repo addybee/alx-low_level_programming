@@ -6,7 +6,8 @@
  */
 int _atoi(char *s)
 {
-	int i, sign, number;
+	int i, sign;
+	unsigned int number;
 
 	sign = 1;
 	number = 0;
@@ -20,6 +21,5 @@ int _atoi(char *s)
 		else if (number > 0)
 			break;
 	}
-	number *= sign;
-	return (number);
+	return (number * sign);
 }
