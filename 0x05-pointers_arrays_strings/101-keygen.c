@@ -9,9 +9,9 @@
 int main(void)
 {
 	int pwdlen, index;
-	pwdlen = 8;
-	char pwd[pwdlen + 1];
-
+	char pwd[9];
+	
+	pwdlen = 9;
 	srand(time(NULL));
 	for (index = 0; index < pwdlen; index++)
 	{
