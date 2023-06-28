@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "main.h"
 /**
  * rev_string - string is reverse
@@ -8,7 +7,7 @@
 void rev_string(char *s)
 {
 	int len, j;
-	char p[256];
+	char p[600];
 
 	len = 0;
 	j = 0;
