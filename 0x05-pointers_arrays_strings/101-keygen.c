@@ -19,6 +19,5 @@ int main(void)
 	}
 	pwd[pwdlen] = '\0';
 	printf("%s\n", pwd);
-
-
+	return (0);
 }
