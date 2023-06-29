@@ -5,7 +5,7 @@
  * terminating null byte
  * @dest: pointer to a char
  * @src: pointer to a char
- * @n: pointer to an integer
+ * @n: variable of type integer
  * Return: character
  */
 char *_strncat(char *dest, char *src, int n)
@@ -16,7 +16,7 @@ char *_strncat(char *dest, char *src, int n)
 	j = 0;
 	while (dest[i])
 		i++;
-	while (n > j)
+	while (j < n && src[j])
 	{
 		dest[i++] = src[j];
 		j++;
