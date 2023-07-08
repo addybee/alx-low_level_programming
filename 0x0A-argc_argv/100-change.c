@@ -17,19 +17,12 @@ int main(int argc, char **argv)
 		printf("Error\n");
 		return (1);
 	}
-	else
+	cent = atoi(argv[1]);
+		for (i = 0; cent > 0; i++)
 	{
-		cent = atoi(argv[1]);
-		if (cent < 0)
-			printf("%d\n", j);
-		for (i = 0; i < 5; i++)
-		{
-			if (cent == 0)
-				break;
-			j += (cent / val[i]);
-			cent %= val[i];
-		}
-		printf("%d\n", j);
+		j += (cent / val[i]);
+		cent %= val[i];
 	}
+	printf("%d\n", j);
 	return (0);
 }
