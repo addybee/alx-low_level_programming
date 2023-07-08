@@ -11,3 +11,15 @@
 0x05-pointers_arrays_strings/*.swp
 0x05-pointers_arrays_strings/*main.c
 0x05-pointers_arrays_strings/a.out
+0x06-pointers_arrays_strings/_*.c
+0x06-pointers_arrays_strings/*.swp
+0x06-pointers_arrays_strings/*main.c
+0x06-pointers_arrays_strings/a.out
+0x07-pointers_arrays_strings/_*.c
+0x07-pointers_arrays_strings/*.swp
+0x07-pointers_arrays_strings/*main.c
+0x07-pointers_arrays_strings/a.out
+0x08-recursion/_*.c
+0x08-recursion/*.swp
+0x08-recursion/*main.c
+0x08-recursion/a.out
