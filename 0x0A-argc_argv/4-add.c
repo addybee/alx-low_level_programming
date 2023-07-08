@@ -8,21 +8,22 @@
  */
 int main(int argc, char **argv)
 {
-	int i, sum;
+	int i, sum, j;
 
 	sum = 0;
-	if (argc == 1)
+	if (argc < 2)
 		printf("%d\n", sum);
 	else
 	{
 		for (i = 1; i < argc; i++)
 		{
-			if (!atoi(argv[i]))
+			j = atoi(argv[i]);
+			if (j < 1)
 			{
 				printf("Error\n");
 				return (1);
 			}
-			sum += atoi(argv[i]);
+			sum += j;
 		}
 		printf("%d\n", sum);
 	}
