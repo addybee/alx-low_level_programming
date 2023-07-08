@@ -20,16 +20,14 @@ int main(int argc, char **argv)
 	else
 	{
 		cent = atoi(argv[1]);
-		if (cent < 0)
+		if (cent <= 0)
 			printf("%d\n", j);
 		for (i = 0; i < 5; i++)
 		{
-			if (cent == 0)
-				break;
 			j += (cent / val[i]);
 			cent %= val[i];
 		}
+		printf("%d\n", j);
 	}
-	printf("%d\n", j);
 	return (0);
 }
