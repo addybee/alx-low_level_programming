@@ -13,7 +13,7 @@ char *create_array(unsigned int size, char c)
 
 	if (size == 0)
 		return (NULL);
-	pp = malloc((size + 1) * sizeof(*pp));
+	pp = malloc((size) * sizeof(*pp));
 	if (pp == NULL)
 		return (pp);
 	i = 0;
@@ -22,6 +22,5 @@ char *create_array(unsigned int size, char c)
 		pp[i] = c;
 		i++;
 	}
-	pp[i] = '\0';
 	return (pp);
 }
