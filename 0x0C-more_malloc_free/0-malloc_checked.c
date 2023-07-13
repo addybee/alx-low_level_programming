@@ -1,6 +1,4 @@
-#include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
 /**
  * malloc_checked - allocates memory  using malloc
  * @b:i number of memory to be allocated
@@ -11,8 +9,7 @@ void *malloc_checked(unsigned int b)
 	void *pp;
 
 	pp = malloc(b);
-	if (pp == NULL){
-		printf("this NULL case");
-		exit(98);}
+	if (pp == NULL)
+		exit(98);
 	return (pp);
 }
