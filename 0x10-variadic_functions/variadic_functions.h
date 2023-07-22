@@ -8,7 +8,7 @@ void print_all(const char * const format, ...);
 /**
  * struct t_key - holds the function for printing different format
  * @task: function to use for printing
- * @c_f: character format
+ * @f: character format
  */
 typedef struct t_key
 {
