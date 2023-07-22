@@ -8,9 +8,10 @@
  */
 void init_dog(struct dog *d, char *name, float age, char *owner)
 {
-	if (!d ||!name || !owner)
-		return (NULL);
-	(*d).name = name;
-	d->age = age;
-	d->owner = owner;
+	if (d && name && owner)
+	{
+		(*d).name = name;
+		d->age = age;
+		d->owner = owner;
+	}
 }
