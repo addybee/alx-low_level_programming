@@ -15,14 +15,9 @@ void print_number(int n)
 	}
 	t = n;
 	digit = 1;
-	if 
 	while (t /= 10)
 		digit++;
-	if (n < 0)
-	{
-		_putchar('-');
-		n *= -1;
-	}
+
 	for (; digit > 0; digit--)
 	{
 		div = 1;
