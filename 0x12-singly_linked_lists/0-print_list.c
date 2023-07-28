@@ -10,7 +10,7 @@ size_t print_list(const list_t *h)
 	size_t num_nodes;
 
 	if (h == NULL)
-		return(0);
+		return (0);
 	num_nodes = 0;
 	temp = h;
 	for (; temp->next != NULL; num_nodes++)
