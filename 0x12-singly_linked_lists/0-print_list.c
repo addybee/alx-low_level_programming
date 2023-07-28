@@ -9,6 +9,8 @@ size_t print_list(const list_t *h)
 	const list_t *temp;
 	size_t num_nodes;
 
+	if (h == NULL)
+		return(NULL);
 	num_nodes = 0;
 	temp = h;
 	for (; temp->next != NULL; num_nodes++)
