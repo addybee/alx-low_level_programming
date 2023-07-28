@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 /**
- * add_note - adds a new node at the beginning of a list_t list.
+ * add_node - adds a new node at the beginning of a list_t list.
  * @head: pointer to a pointer to list_t
  * @str: string to be added
  * Return:the address of the new element, or NULL if it failed
@@ -17,6 +17,8 @@ list_t *add_node(list_t **head, const char *str)
 	if (str == NULL || head == NULL)
 		return (NULL);
 	temp = (char *)strdup(str);
+	if (!temp)
+		return (NULL);
 	len = _strlen(temp);
 	p = malloc((len + 1) * sizeof(char));
 	if (p == NULL)
