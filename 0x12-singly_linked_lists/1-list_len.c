@@ -6,14 +6,14 @@
 */
 size_t list_len(const list_t *h)
 {
-    const list_t *temp;
-    size_t num_nodes;
+	const list_t *temp;
+	size_t num_nodes;
 
-    num_nodes = 0;
-    temp = h;
-    for (; temp; num_nodes++)
-    {
-        temp = temp->next;
-    }
-    return (num_nodes);
+	num_nodes = 0;
+	temp = h;
+	for (; temp; num_nodes++)
+	{
+		temp = temp->next;
+	}
+	return (num_nodes);
 }
