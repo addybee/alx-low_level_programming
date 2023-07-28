@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <string.h>
 #include "lists.h"
 /**
  * add_node_end - adds a new node at the end of a list_t list.
@@ -9,43 +7,54 @@
 */
 list_t *add_node_end(list_t **head, const char *str)
 {
-	char *n_str, *p;
-	list_t *new, *l_node = NULL;
-	int len = 0;
-
-	if (str != NULL)
-	{
-		n_str = (char *)strdup(str);
-		len = _strlen(n_str);
-		p = malloc(sizeof(char) * (len + 1));
-		if (p == NULL)
-			return (NULL);
-		while (n_str)
-			*p++ = *n_str++;
-	}
-	else
-		n_str = NULL;
-
-	if (*head != NULL)
-	{
-		l_node = *head;
-		while (l_node->next != NULL)
-			l_node = l_node->next;
-	}
+	list_t *new, *last_node;
+	char *p;
+	char *temp;
+	unsigned int len, index;
+	if (str == NULL || head == NULL)
+		return (NULL);
+	temp = (char *)strdup(str);
+	if (!temp)
+		return (NULL);
+	len = _strlen(temp);
+	if (!len)
+		return(NULL);
+	p = malloc((len + 1) * sizeof(char));
+	if (p == NULL)
+		return (NULL);
+	for (index = 0; temp[index]; index++)
+		p[index] = temp[index];
+	p[index] = '\0';
 	new = malloc(sizeof(list_t));
 	if (new == NULL)
 	{
 		free(p);
 		return (NULL);
 	}
-
-	if (*head == NULL)
-		*head = new;
-	if (l_node != NULL)
-		l_node->next = new;
 	new->str = p;
-	new->len = len;
-	return (new);
+	new->len = index;
+	new->next = NULL;
+	if (*head != NULL)
+	{
+		last_node = *head;
+		while (last_node != NULL)
+		{
+			printf("looking for lastnode\n");
+			last_node = last_node->next;
+		}
+	}
+	printf("allocate head to temporary ptr\n");
+	if (*head == NULL)
+	{
+		*head = new;
+		printf("for empty list\n");
+	}
+	if (last_node != NULL)
+	{
+		last_node->next = new;
+		printf("last to new\n");
+	}
+	return(new);
 }
 
 /**
@@ -53,7 +62,7 @@ list_t *add_node_end(list_t **head, const char *str)
  * @s: pointer variable of char type
  * Return: length of string
  */
-int _strlen(char *s)
+unsigned int _strlen(char *s)
 {
 	int counter, i;
 
