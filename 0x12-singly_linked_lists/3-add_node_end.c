@@ -17,8 +17,6 @@ list_t *add_node_end(list_t **head, const char *str)
 	if (!temp)
 		return (NULL);
 	len = _strlen(temp);
-	if (!len)
-		return (NULL);
 	p = malloc((len + 1) * sizeof(char));
 	if (p == NULL)
 	{
@@ -28,7 +26,7 @@ list_t *add_node_end(list_t **head, const char *str)
 	for (index = 0; temp[index]; index++)
 		p[index] = temp[index];
 	p[index] = '\0';
-	new = malloc(sizeof(list_t));
+	new = (list_t *)malloc(sizeof(list_t));
 	if (new == NULL)
 	{
 		free(p);
@@ -37,15 +35,15 @@ list_t *add_node_end(list_t **head, const char *str)
 	new->str = p;
 	new->len = index;
 	new->next = NULL;
-	if (*head != NULL)
-	{
-		last_node = *head;
-		while (last_node != NULL)
-			last_node = last_node->next;
-		last_node->next = new;
-	}
 	if (*head == NULL)
+	{
 		*head = new;
+		return (new);
+	}
+	last_node = *head;
+	while (last_node->next != NULL)
+		last_node = last_node->next;
+	last_node->next = new;
 	return (new);
 }
 
