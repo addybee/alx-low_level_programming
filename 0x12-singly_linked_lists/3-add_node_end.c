@@ -8,24 +8,25 @@
 list_t *add_node_end(list_t **head, const char *str)
 {
 	list_t *new, *last_node;
-	char *p;
-	char *temp;
+	char *p, *temp;
 	unsigned int len, index;
+
 	if (str == NULL || head == NULL)
 		return (NULL);
 	temp = (char *)strdup(str);
 	if (!temp)
 		return (NULL);
 	len = _strlen(temp);
-	if (!len)
-		return(NULL);
 	p = malloc((len + 1) * sizeof(char));
 	if (p == NULL)
+	{
+		free(p);
 		return (NULL);
+	}
 	for (index = 0; temp[index]; index++)
 		p[index] = temp[index];
 	p[index] = '\0';
-	new = malloc(sizeof(list_t));
+	new = (list_t *)malloc(sizeof(list_t));
 	if (new == NULL)
 	{
 		free(p);
@@ -34,27 +35,16 @@ list_t *add_node_end(list_t **head, const char *str)
 	new->str = p;
 	new->len = index;
 	new->next = NULL;
-	if (*head != NULL)
-	{
-		last_node = *head;
-		while (last_node != NULL)
-		{
-			printf("looking for lastnode\n");
-			last_node = last_node->next;
-		}
-	}
-	printf("allocate head to temporary ptr\n");
 	if (*head == NULL)
 	{
 		*head = new;
-		printf("for empty list\n");
+		return (new);
 	}
-	if (last_node != NULL)
-	{
-		last_node->next = new;
-		printf("last to new\n");
-	}
-	return(new);
+	last_node = *head;
+	while (last_node->next != NULL)
+		last_node = last_node->next;
+	last_node->next = new;
+	return (new);
 }
 
 /**
