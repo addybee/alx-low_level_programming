@@ -15,7 +15,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	tem_ptr = *head;
 	for (i = 1; tem_ptr->next != NULL; i++)
 		tem_ptr = tem_ptr->next;
-	if (idx > i || !head || !(*head))
+	if (idx > i || !head)
 		return (NULL);
 	/* create new node memory*/
 	new = (listint_t *)malloc(sizeof(listint_t));
@@ -24,13 +24,15 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	new->n = n;
 	new->next = NULL;
 	/* traverse the list to the position and insert*/
-	tem_ptr = *head;
+	if (*head == NULL && idx == 0)
+		*head = new;
 	if (idx == 0)
 	{
 		new->next = *head;
 		*head = new;
 		return (new);
 	}
+	tem_ptr = *head;
 	for (; idx != 1; idx--)
 		tem_ptr = tem_ptr->next;
 	new->next = tem_ptr->next;
