@@ -9,8 +9,8 @@ size_t listint_len(const listint_t *h)
 	size_t num_nodes;
 	listint_t *temp;
 	
-	temp = (listint_t *)h;
 	num_nodes = 0;
+	temp = (listint_t *)h;
 	if (h == NULL)
 		return (num_nodes);
 	while (temp->next != NULL)
