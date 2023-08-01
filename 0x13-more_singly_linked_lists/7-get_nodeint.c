@@ -13,13 +13,13 @@ listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
 
 	/* check for valid input arguement */
 	if (!head)
-		exit(0);
+		return (NULL);
 	tem_ptr = head;
 	/* find the length of the list */
 	for (i = 0; tem_ptr->next != NULL; i++)
 		tem_ptr = tem_ptr->next;
 	if (index > i)
-		exit(0);
+		return (NULL);
 	/* traverse the list to the nth node*/
 	tem_ptr = head;
 	while (index >= 1 && tem_ptr != NULL)
