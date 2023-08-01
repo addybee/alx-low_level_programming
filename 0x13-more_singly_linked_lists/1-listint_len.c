@@ -6,9 +6,9 @@
  */
 size_t listint_len(const listint_t *h)
 {
-	size_t num_nodes;
 	listint_t *temp;
-	
+	size_t num_nodes;
+
 	num_nodes = 0;
 	temp = (listint_t *)h;
 	if (h == NULL)
