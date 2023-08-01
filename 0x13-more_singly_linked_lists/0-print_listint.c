@@ -6,9 +6,11 @@
  */
 size_t print_listint(const listint_t *h)
 {
-	size_t num_nodes = 0;
-	listint_t *temp = (listint_t *)h;
-	
+	size_t num_nodes;
+	listint_t *temp;
+
+	num_nodes = 0;
+	temp = (listint_t *)h;
 	if (h == NULL)
 		return (num_nodes);
 	while (temp->next != NULL)
