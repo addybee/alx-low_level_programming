@@ -36,7 +36,6 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 		tem_ptr = *head;
 		for (; idx != 1; tem_ptr = tem_ptr->next)
 			idx--;
-		printf("element: %u\n", i);
 		new->next = tem_ptr->next;
 		tem_ptr->next = new;
 	}
