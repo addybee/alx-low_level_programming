@@ -13,7 +13,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 
 	/* validate input arguement*/
 	tem_ptr = *head;
-	for (i = 1; tem_ptr->next != NULL; i++)
+	for (i = 0; tem_ptr != NULL; i++)
 		tem_ptr = tem_ptr->next;
 	if (idx > i || !head)
 		return (NULL);
@@ -24,18 +24,21 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	new->n = n;
 	new->next = NULL;
 	/* traverse the list to the position and insert*/
-	if (*head == NULL && idx == 0)
+	if (*head == NULL)
 		*head = new;
-	if (idx == 0)
+	else if (idx == 0)
 	{
 		new->next = *head;
 		*head = new;
-		return (new);
 	}
-	tem_ptr = *head;
-	for (; idx != 1; idx--)
-		tem_ptr = tem_ptr->next;
-	new->next = tem_ptr->next;
-	tem_ptr->next = new;
+	else
+	{
+		tem_ptr = *head;
+		for (; idx != 1; tem_ptr = tem_ptr->next)
+			idx--;
+		printf("element: %u\n", i);
+		new->next = tem_ptr->next;
+		tem_ptr->next = new;
+	}
 	return (new);
 }
