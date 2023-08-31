@@ -6,23 +6,28 @@
 */
 unsigned int binary_to_uint(const char *b)
 {
-        unsigned int num = 0;
+        unsigned int num;
+        int len;
 
-        if (b ==NULL|| !validate_input_bin(b))
-                return(num);
+        num = 0;
+        len = (int)validate_input_bin(b);
+        if (b == NULL || !len)
+                return (num);
         /* Convert the binary string to an unsigned integer */
-        while (*b != '\0')
+        len--;
+        while (len >= 0)
         {
-                num = (num << 1) + (*b - '0');
+                num += (*b - '0') << len;
                 b++;
+                len--;
         }
-        return num;
+        return (num);
 }
 
 /**
  * validate_input_bin - check if there is one or more chars in the string b that is not 0 or 1.
  * @b: is pointing to a string.
- * Return: 1 if success and 0 for failure
+ * Return: length of string if successful and 0 for failure
 */
 unsigned int validate_input_bin(const char *b)
 {
@@ -34,5 +39,5 @@ unsigned int validate_input_bin(const char *b)
                         return (0);
                 i++;
         }
-        return (1);
+        return (i);
 }
