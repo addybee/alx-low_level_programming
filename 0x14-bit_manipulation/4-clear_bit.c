@@ -12,6 +12,6 @@ int clear_bit(unsigned long int *n, unsigned int index)
 	if (index >= (8 * sizeof(n)))
 		return (-1);
 	if ((*n & (bitmask << index)))
-        *n = (*n ^ (bitmask << index));
+	*n = (*n ^ (bitmask << index));
 	return (1);
 }
