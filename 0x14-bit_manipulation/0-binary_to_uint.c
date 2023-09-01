@@ -11,8 +11,10 @@ unsigned int binary_to_uint(const char *b)
 	int len;
 
 	num = 0;
+	if (b == NULL)
+		return (0);
 	len = (int)validate_input_bin(b);
-	if (b == NULL || !len || sizeof(*b) > sizeof(num))
+	if (!len || sizeof(*b) > sizeof(num))
 		return (num);
 	/* Convert the binary string to an unsigned integer */
 	len--;
