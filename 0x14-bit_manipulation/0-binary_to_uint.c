@@ -9,11 +9,14 @@ unsigned int binary_to_uint(const char *b)
 {
 	unsigned int num;
 	int len;
+	char *ptr;
 
 	num = 0;
+	if (b == NULL)
+		return (0);
 	len = (int)validate_input_bin(b);
-	if (b == NULL || !len)
-	return (num);
+	if (!len || sizeof(*b) > sizeof(num))
+	return (0);
 	/* Convert the binary string to an unsigned integer */
 	len--;
 	while (len >= 0)
