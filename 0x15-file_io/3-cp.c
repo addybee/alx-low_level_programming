@@ -21,7 +21,7 @@ int main(int ac, char **av)
 		exit(97);
 	}
 	fh_from = open(av[1], O_RDONLY);
-	fh_to = open(av[2], O_CREAT | O_TRUNC | O_WRONLY, 0662);
+	fh_to = open(av[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
 	if (fh_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n",
