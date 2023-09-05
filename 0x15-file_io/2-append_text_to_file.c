@@ -17,7 +17,10 @@ int append_text_to_file(const char *filename, char *text_content)
 	if (text_content)
 	{
 		if (write(fh, text_content, (sizeof(text_content) - 1)) == -1)
+		{
+			close(fh);
 			return (-1);
+		}
 	}
 	close(fh);
 	return (1);
