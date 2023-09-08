@@ -1,7 +1,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <elf.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #define BUF 64
@@ -101,13 +100,9 @@ void printData_Version(char *head)
 		printf("<unknown: %02X>\n", head[5]);
 	/* prints version info from elf header */
 	printf(" %-35s", "Version:");
-	if (head[6] <= EV_CURRENT)
+	if (head[6] >= 1)
 	{
-		printf("%d", head[6]);
-		if (head[6] == EV_CURRENT)
-			printf(" (current)\n");
-		else
-			printf("\n");
+		printf("%d (current)\n", head[6]);
 	}
 	else
 	{
@@ -172,7 +167,7 @@ void printType_Addr(char *head)
 {
 	u_int16_t tp;
 
-	tp = *((u_int16_t*)(head + 16));
+	tp = *((u_int16_t *)(head + 16));
 	printf(" %-35s", "Type:");
 	if (tp == 1)
 		printf("REL (Relocatable file)\n");
@@ -184,5 +179,5 @@ void printType_Addr(char *head)
 		printf("CORE (Core file)\n");
 	else
 		printf("NONE <unknown>: %02x\n",  tp);
-	printf(" %-35s0x%X\n", "Entry point address:", *((u_int32_t*)(head + 24)));
+	printf(" %-35s0x%X\n", "Entry point address:", *((u_int32_t *)(head + 24)));
 }
