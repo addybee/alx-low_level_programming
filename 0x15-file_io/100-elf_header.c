@@ -1,15 +1,14 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <stdlib.h>
 #include <elf.h>
+#include <stdlib.h>
 #include <sys/types.h>
-#define BUF 32
+#define BUF 64
 void printMagic_Class(char *head);
 void printData_Version(char *head);
 void printABI(char *head);
-void printType_Addr(Elf32_Ehdr head);
-void help(int *fh_elf, int s, char *t);
+void printType_Addr(char *head);
 /**
  * main - entry point
  * @ac: number of arg
@@ -55,7 +54,7 @@ int main(int ac, char **av)
 	printMagic_Class(headf);
 	printData_Version(headf);
 	printABI(headf);
-	help(&fh_elf, headf[4], av[1]);
+	printType_Addr(headf);
 	close(fh_elf);
 	return (1);
 }
@@ -169,71 +168,21 @@ void printABI(char *head)
  * @head: header information
  * Return: void
  */
-void printType_Addr(Elf32_Ehdr head)
+void printType_Addr(char *head)
 {
-	int tp;
+	u_int16_t tp;
 
-	tp = head.e_type;
+	tp = *((u_int16_t*)(head + 16));
 	printf(" %-35s", "Type:");
 	if (tp == 1)
 		printf("REL (Relocatable file)\n");
 	else if (tp == 2)
-		printf("EXEC (Executable file)\n");
+		printf("EXEC (iExecutable file)\n");
 	else if (tp == 3)
 		printf("DYN (Shared object file)\n");
 	else if (tp == 4)
 		printf("CORE (Core file)\n");
 	else
-		printf("NONE <unknown>: %02x\n",  head.e_type);
-	printf(" %-35s0x%X\n", "Entry point address:", head.e_entry);
-}
-
-/**
- * help - help print the type and address
- * @fh_elf: pointer variable of int type
- * @s: pointer variable of int type
- * @t: pointer to filename
- * Return: length of string
- */
-void help(int *fh_elf, int s, char *t)
-{
-	int rdbyte;
-
-	if (s == 1)
-	{
-		Elf32_Ehdr head;
-
-		rdbyte = read(*fh_elf, &head, sizeof(head));
-		if (rdbyte != sizeof(head))
-		{
-			dprintf(STDERR_FILENO,
-			"Error: Can't read from file %s\n", t);
-			exit(98);
-		}
-		printType_Addr(head);
-	}
-	else
-	{
-		Elf64_Ehdr head;
-
-		rdbyte = read(*fh_elf, &head, sizeof(head));
-		if (rdbyte != sizeof(head))
-		{
-			dprintf(STDERR_FILENO,
-			"Error: Can't read from file %s\n", t);
-			exit(98);
-		}
-		printf(" %-35s", "Type:");
-		if (head.e_type == 1)
-			printf("REL (Relocatable file)\n");
-		else if (head.e_type == 2)
-			printf("EXEC (Executable file)\n");
-		else if (head.e_type == 3)
-			printf("DYN (Shared object file)\n");
-		else if (head.e_type == 4)
-			printf("CORE (Core file)\n");
-		else
-			printf("NONE <unknown>: %02X\n",  head.e_type);
-		printf(" %-35s0x%lX\n", "Entry point address:", head.e_entry);
-	}
+		printf("NONE <unknown>: %02x\n",  tp);
+	printf(" %-35s0x%X\n", "Entry point address:", *((u_int32_t*)(head + 24)));
 }
