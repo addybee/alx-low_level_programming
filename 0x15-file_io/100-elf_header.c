@@ -106,7 +106,8 @@ void printData_Version(char *head)
 		printf("%d", head[6]);
 		if (head[6] == EV_CURRENT)
 			printf(" (current)\n");
-		write(1, "\n", 1);
+		else
+			printf("\n");
 
 	}
 	else
