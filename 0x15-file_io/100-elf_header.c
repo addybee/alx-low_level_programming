@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #define BUF 64
+#define EV_CURRENT 1
 void printMagic_Class(char *head);
 void printData_Version(char *head);
 void printABI(char *head);
@@ -74,7 +75,7 @@ void printMagic_Class(char *head)
 			printf(" ");
 	}
 	printf("\n");
-	printf(" %-35s", "Class:");
+	printf(" %-36s", "Class:");
 	if (head[4] == 1)
 		printf("ELF32\n");
 	else if (head[4] == 2)
@@ -91,7 +92,7 @@ void printMagic_Class(char *head)
  */
 void printData_Version(char *head)
 {
-	printf(" %-35s", "Data:");
+	printf(" %-36s", "Data:");
 	if (head[5] == 1)
 		printf("2's complement, little endian\n");
 	else if (head[5] == 2)
@@ -99,10 +100,14 @@ void printData_Version(char *head)
 	else
 		printf("<unknown: %02X>\n", head[5]);
 	/* prints version info from elf header */
-	printf(" %-35s", "Version:");
-	if (head[6] >= 1)
+	printf(" %-36s", "Version:");
+	if (head[6] <= EV_CURRENT )
 	{
-		printf("%d (current)\n", head[6]);
+		printf("%d", head[6]);
+		if (head[6] == EV_CURRENT)
+			printf(" (current)\n");
+		write(1, "\n", 1);
+
 	}
 	else
 	{
@@ -117,45 +122,38 @@ void printData_Version(char *head)
  */
 void printABI(char *head)
 {
-	printf(" %-35s", "OS/ABI:");
+	printf(" %-36s", "OS/ABI:");
 	switch (head[7])
 	{
 	case 0:
-	case 1:
 		printf("UNIX - System V\n");
 		break;
-	case 2:
+	case 1:
 		printf("UNIX - HP-UX\n");
 		break;
-	case 3:
+	case 2:
 		printf("UNIX - NetBSD\n");
 		break;
-	case 4:
+	case 3:
 		printf("UNIX - Linux\n");
 		break;
-	case 5:
+	case 6:
 		printf("UNIX - Solaris\n");
 		break;
-	case 6:
+	case 8:
 		printf("UNIX - IRIX\n");
 		break;
-	case 7:
+	case 9:
 		printf("UNIX - FreeBSD\n");
 		break;
-	case 8:
-		printf("UNIX - Tru64\n");
-		break;
-	case 9:
-		printf("UNIX - ARM architecture\n");
-		break;
 	case 10:
-		printf("UNIX - Sand-alone (embedded)\n");
+		printf("UNIX - Tru64\n");
 		break;
 	default:
 		printf("<unknown: %02x>\n", head[7]);
 		break;
 	}
-	printf(" %-35s%d\n", "ABI Version:", head[8]);
+	printf(" %-36s%d\n", "ABI Version:", head[8]);
 }
 
 /**
@@ -168,16 +166,16 @@ void printType_Addr(char *head)
 	u_int16_t tp;
 
 	tp = *((u_int16_t *)(head + 16));
-	printf(" %-35s", "Type:");
+	printf(" %-36s", "Type:");
 	if (tp == 1)
 		printf("REL (Relocatable file)\n");
 	else if (tp == 2)
-		printf("EXEC (iExecutable file)\n");
+		printf("EXEC (Executable file)\n");
 	else if (tp == 3)
 		printf("DYN (Shared object file)\n");
 	else if (tp == 4)
 		printf("CORE (Core file)\n");
 	else
 		printf("NONE <unknown>: %02x\n",  tp);
-	printf(" %-35s0x%X\n", "Entry point address:", *((u_int32_t *)(head + 24)));
+	printf(" %-36s0x%X\n", "Entry point address:", *((u_int32_t *)(head + 24)));
 }
