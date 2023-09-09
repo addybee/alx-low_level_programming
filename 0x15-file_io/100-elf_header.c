@@ -101,7 +101,7 @@ void printData_Version(char *head)
 		printf("<unknown: %02X>\n", head[5]);
 	/* prints version info from elf header */
 	printf(" %-36s", "Version:");
-	if (head[6] <= EV_CURRENT )
+	if (head[6] <= EV_CURRENT)
 	{
 		printf("%d", head[6]);
 		if (head[6] == EV_CURRENT)
