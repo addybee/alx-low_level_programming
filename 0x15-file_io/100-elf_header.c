@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <elf.h>
 #include <sys/types.h>
 #define BUF 64
-#define EV_CURRENT 1
 void printMagic_Class(char *head);
 void printData_Version(char *head);
 void printABI(char *head);
@@ -67,7 +67,7 @@ void printMagic_Class(char *head)
 {
 	int i;
 
-	printf(" Magic:    ");
+	printf(" Magic:   ");
 	for (i = 0; i < 16; i++)
 	{
 		printf("%02X", head[i]);
