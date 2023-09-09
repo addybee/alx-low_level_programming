@@ -67,10 +67,10 @@ void printMagic_Class(char *head)
 {
 	int i;
 
-	printf(" Magic:   ");
+	printf(" Magic:    ");
 	for (i = 0; i < 16; i++)
 	{
-		printf("%02X", head[i]);
+		printf("%02x", head[i]);
 		if (i != 15)
 			printf(" ");
 	}
