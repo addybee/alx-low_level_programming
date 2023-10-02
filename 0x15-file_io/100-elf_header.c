@@ -71,7 +71,7 @@ void printMagic_Class(Elf32_Ehdr *head)
 {
 	int i;
 
-	printf(" Magic:    ");
+	printf("  Magic:    ");
 	for (i = EI_MAG0; i < EI_NIDENT; i++)
 	{
 		printf("%02x", head->e_ident[i]);
@@ -79,7 +79,7 @@ void printMagic_Class(Elf32_Ehdr *head)
 			printf(" ");
 	}
 	printf("\n");
-	printf(" %-36s", "Class:");
+	printf("  %-36s", "Class:");
 	if (head->e_ident[EI_CLASS] == ELFCLASS32)
 		printf("ELF32\n");
 	else if (head->e_ident[EI_CLASS] == ELFCLASS64)
@@ -96,7 +96,7 @@ void printMagic_Class(Elf32_Ehdr *head)
  */
 void printData_Version(Elf32_Ehdr *head)
 {
-	printf(" %-36s", "Data:");
+	printf("  %-36s", "Data:");
 	if (head->e_ident[EI_DATA] == ELFDATA2LSB)
 		printf("2's complement, little endian\n");
 	else if (head->e_ident[EI_DATA] == ELFDATA2MSB)
@@ -104,7 +104,7 @@ void printData_Version(Elf32_Ehdr *head)
 	else
 		printf("<unknown: %02X>\n", head->e_ident[EI_DATA]);
 	/* prints version info from elf header */
-	printf(" %-36s", "Version:");
+	printf("  %-36s", "Version:");
 	if (head->e_ident[EI_DATA] == EV_NONE)
 		printf("<unknown %%lx>");
 	else
@@ -124,7 +124,7 @@ void printData_Version(Elf32_Ehdr *head)
  */
 void printABI(Elf32_Ehdr *head)
 {
-	printf(" %-36s", "OS/ABI:");
+	printf("  %-36s", "OS/ABI:");
 	switch (head->e_ident[EI_OSABI])
 	{
 	case ELFOSABI_SYSV:
@@ -155,7 +155,7 @@ void printABI(Elf32_Ehdr *head)
 		printf("<unknown: %02x>\n", head->e_ident[EI_OSABI]);
 		break;
 	}
-	printf(" %-36s%d\n", "ABI Version:", head->e_ident[EI_ABIVERSION]);
+	printf("  %-36s%d\n", "ABI Version:", head->e_ident[EI_ABIVERSION]);
 }
 
 /**
@@ -165,7 +165,7 @@ void printABI(Elf32_Ehdr *head)
  */
 void printType_Addr32(Elf32_Ehdr *head)
 {
-	printf(" %-36s", "Type:");
+	printf("  %-36s", "Type:");
 	if (head->e_type == ET_REL)
 		printf("REL (Relocatable file)\n");
 	else if (head->e_type == ET_EXEC)
@@ -176,7 +176,7 @@ void printType_Addr32(Elf32_Ehdr *head)
 		printf("CORE (Core file)\n");
 	else
 		printf("NONE <unknown>: %02x\n",  head->e_type);
-	printf(" %-36s0x%X\n", "Entry point address:", head->e_entry);
+	printf("  %-36s0x%X\n", "Entry point address:", head->e_entry);
 }
 /**
  * printType_Addr64 - prints elf filetype and entry address from header 64 bit
@@ -199,7 +199,7 @@ void printType_Addr64(int fh_elf, char *el)
 		close(fh_elf);
 		exit(98);
 	}
-	printf(" %-36s", "Type:");
+	printf("  %-36s", "Type:");
 	if (head->e_type == ET_REL)
 		printf("REL (Relocatable file)\n");
 	else if (head->e_type == ET_EXEC)
@@ -210,5 +210,5 @@ void printType_Addr64(int fh_elf, char *el)
 		printf("CORE (Core file)\n");
 	else
 		printf("NONE <unknown>: %02x\n",  head->e_type);
-	printf(" %-36s0x%lX\n", "Entry point address:", head->e_entry);
+	printf("  %-36s0x%lX\n", "Entry point address:", head->e_entry);
 }
