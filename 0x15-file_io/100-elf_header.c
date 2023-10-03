@@ -69,7 +69,7 @@ void printMagic_Class(Elf64_Ehdr *head)
 {
 	int i;
 
-	printf("  Magic:    ");
+	printf("  Magic:   ");
 	for (i = EI_MAG0; i < EI_NIDENT; i++)
 	{
 		printf("%02x", head->e_ident[i]);
@@ -77,7 +77,7 @@ void printMagic_Class(Elf64_Ehdr *head)
 			printf(" ");
 	}
 	printf("\n");
-	printf("  %-36s", "Class:");
+	printf("  %-35s", "Class:");
 	if (head->e_ident[EI_CLASS] == ELFCLASS32)
 		printf("ELF32\n");
 	else if (head->e_ident[EI_CLASS] == ELFCLASS64)
@@ -96,7 +96,7 @@ void printMagic_Class(Elf64_Ehdr *head)
  */
 void printData_Version(Elf64_Ehdr *head)
 {
-	printf("  %-36s", "Data:");
+	printf("  %-35s", "Data:");
 	if (head->e_ident[EI_DATA] == ELFDATA2LSB)
 		printf("2's complement, little endian\n");
 	else if (head->e_ident[EI_DATA] == ELFDATA2MSB)
@@ -106,7 +106,7 @@ void printData_Version(Elf64_Ehdr *head)
 	else
 		printf("<unknown: %02X>\n", head->e_ident[EI_DATA]);
 	/* prints version info from elf header */
-	printf("  %-36s", "Version:");
+	printf("  %-35s", "Version:");
 	printf("%d", head->e_ident[EI_DATA]);
 	if (head->e_ident[EI_DATA] == EV_CURRENT)
 		printf(" (current)\n");
@@ -121,7 +121,7 @@ void printData_Version(Elf64_Ehdr *head)
  */
 void printABI(Elf64_Ehdr *head)
 {
-	printf("  %-36s", "OS/ABI:");
+	printf("  %-35s", "OS/ABI:");
 	switch (head->e_ident[EI_OSABI])
 	{
 	case ELFOSABI_NONE:
@@ -158,7 +158,7 @@ void printABI(Elf64_Ehdr *head)
 		printf("<unknown: %02x>\n", head->e_ident[EI_OSABI]);
 		break;
 	}
-	printf("  %-36s%d\n", "ABI Version:", head->e_ident[EI_ABIVERSION]);
+	printf("  %-35s%d\n", "ABI Version:", head->e_ident[EI_ABIVERSION]);
 }
 
 /**
@@ -170,7 +170,7 @@ void printType(Elf64_Ehdr *head)
 {
 	if (head->e_ident[EI_DATA] == ELFDATA2MSB)
 		head->e_type >>= 8;
-	printf("  %-36s", "Type:");
+	printf("  %-35s", "Type:");
 	if (head->e_type == ET_REL)
 		printf("REL (Relocatable file)\n");
 	else if (head->e_type == ET_EXEC)
@@ -197,7 +197,7 @@ void printAddr(Elf64_Ehdr *head)
 			((head->e_entry >> 8) & 0xFF00FF);
 		head->e_entry = (head->e_entry << 16) | (head->e_entry >> 16);
 	}
-	printf("  %-36s", "Entry point address:");
+	printf("  %-35s", "Entry point address:");
 	if (head->e_ident[EI_CLASS] == ELFCLASS32)
 	{
 		printf("%#x\n",	(unsigned int)head->e_entry);
