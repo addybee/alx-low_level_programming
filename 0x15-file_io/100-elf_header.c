@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <elf.h>
 #include <sys/types.h>
-void printMagic_Class(Elf32_Ehdr *head);
-void printData_Version(Elf32_Ehdr *head);
-void printABI(Elf32_Ehdr *head);
-void printType_Addr32(Elf32_Ehdr *head);
-void printType_Addr64(int fh_elf, char *el);
+void printMagic_Class(Elf64_Ehdr *head);
+void printData_Version(Elf64_Ehdr *head);
+void printABI(Elf64_Ehdr *head);
+void printType(Elf64_Ehdr *head);
+void printAddr(Elf64_Ehdr *head);
 /**
  * main - entry point
  * @ac: number of arg
@@ -19,7 +19,7 @@ int main(int ac, char **av)
 {
 	size_t rdbyte;
 	int fh_elf;
-	Elf32_Ehdr headf;
+	Elf64_Ehdr headf;
 
 	if (ac != 2)
 	{
@@ -55,10 +55,8 @@ int main(int ac, char **av)
 	printMagic_Class(&headf);
 	printData_Version(&headf);
 	printABI(&headf);
-	if (headf.e_ident[EI_CLASS] == ELFCLASS32)
-		printType_Addr32(&headf);
-	else
-		printType_Addr64(fh_elf, av[1]);
+	printType(&headf);
+	printAddr(&headf);
 	close(fh_elf);
 	return (1);
 }
@@ -67,7 +65,7 @@ int main(int ac, char **av)
  * @head: header information
  * Return: void
  */
-void printMagic_Class(Elf32_Ehdr *head)
+void printMagic_Class(Elf64_Ehdr *head)
 {
 	int i;
 
@@ -96,7 +94,7 @@ void printMagic_Class(Elf32_Ehdr *head)
  * @head: header information
  * Return: nothing
  */
-void printData_Version(Elf32_Ehdr *head)
+void printData_Version(Elf64_Ehdr *head)
 {
 	printf("  %-36s", "Data:");
 	if (head->e_ident[EI_DATA] == ELFDATA2LSB)
@@ -121,7 +119,7 @@ void printData_Version(Elf32_Ehdr *head)
  * @head: header information
  * Return: void
  */
-void printABI(Elf32_Ehdr *head)
+void printABI(Elf64_Ehdr *head)
 {
 	printf("  %-36s", "OS/ABI:");
 	switch (head->e_ident[EI_OSABI])
@@ -164,11 +162,11 @@ void printABI(Elf32_Ehdr *head)
 }
 
 /**
- * printType_Addr32 - prints elf filetype and entry address from header 32 bit
+ * printType - prints elf filetype
  * @head: header information
  * Return: void
  */
-void printType_Addr32(Elf32_Ehdr *head)
+void printType(Elf64_Ehdr *head)
 {
 	if (head->e_ident[EI_DATA] == ELFDATA2MSB)
 		head->e_type >>= 8;
@@ -185,39 +183,27 @@ void printType_Addr32(Elf32_Ehdr *head)
 		printf("NONE (None)\n");
 	else
 		printf("<unknown: %02x>\n",  head->e_type);
-	printf("  %-36s0x%X\n", "Entry point address:", head->e_entry);
 }
 /**
- * printType_Addr64 - prints elf filetype and entry address from header 64 bit
- * @fh_elf: file decriptor
- * @el: is the elf header file
- * Return: void
+ * printAddr - prints entry address from header
+ * @head: header information
+ *  Return: void
  */
-void printType_Addr64(int fh_elf, char *el)
+void printAddr(Elf64_Ehdr *head)
 {
-	Elf64_Ehdr header;
-	Elf64_Ehdr *head;
-	size_t rdbyte;
-
-	lseek(fh_elf, 0, SEEK_SET);
-	head = &header;
-	rdbyte = read(fh_elf, head, sizeof(header));
-	if (rdbyte != sizeof(header))
+	if (head->e_ident[EI_DATA] == ELFDATA2MSB)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", el);
-		close(fh_elf);
-		exit(98);
+		head->e_entry = ((head->e_entry << 8) & 0xFF00FF00) |
+			((head->e_entry >> 8) & 0xFF00FF);
+		head->e_entry = (head->e_entry << 16) | (head->e_entry >> 16);
 	}
-	printf("  %-36s", "Type:");
-	if (head->e_type == ET_REL)
-		printf("REL (Relocatable file)\n");
-	else if (head->e_type == ET_EXEC)
-		printf("EXEC (Executable file)\n");
-	else if (head->e_type == ET_DYN)
-		printf("DYN (Shared object file)\n");
-	else if (head->e_type == ET_CORE)
-		printf("CORE (Core file)\n");
+	printf("  %-36s", "Entry point address:");
+	if (head->e_ident[EI_CLASS] == ELFCLASS32)
+	{
+		printf("%#x\n",	(unsigned int)head->e_entry);
+	}
 	else
-		printf("NONE <unknown>: %02x\n",  head->e_type);
-	printf("  %-36s0x%lX\n", "Entry point address:", head->e_entry);
+	{
+		printf("%#lx\n", head->e_entry);
+	}
 }
