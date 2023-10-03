@@ -84,6 +84,8 @@ void printMagic_Class(Elf32_Ehdr *head)
 		printf("ELF32\n");
 	else if (head->e_ident[EI_CLASS] == ELFCLASS64)
 		printf("ELF64\n");
+	else if (head->e_ident[EI_CLASS] == ELFCLASSNONE)
+		printf("none\n");
 	else
 		printf("<unknown: %02X>\n",  head->e_ident[EI_CLASS]);
 }
@@ -101,20 +103,17 @@ void printData_Version(Elf32_Ehdr *head)
 		printf("2's complement, little endian\n");
 	else if (head->e_ident[EI_DATA] == ELFDATA2MSB)
 		printf("2's complement, big endian\n");
+	else if (head->e_ident[EI_DATA] == ELFDATANONE)
+		printf("none\n");
 	else
 		printf("<unknown: %02X>\n", head->e_ident[EI_DATA]);
 	/* prints version info from elf header */
 	printf("  %-36s", "Version:");
-	if (head->e_ident[EI_DATA] == EV_NONE)
-		printf("<unknown %%lx>");
+	printf("%d", head->e_ident[EI_DATA]);
+	if (head->e_ident[EI_DATA] == EV_CURRENT)
+		printf(" (current)\n");
 	else
-	{
-		printf("%d", head->e_ident[EI_DATA]);
-		if (head->e_ident[EI_DATA] == EV_CURRENT)
-			printf(" (current)\n");
-		else
-			printf("\n");
-	}
+		printf("\n");
 }
 
 /**
@@ -127,7 +126,7 @@ void printABI(Elf32_Ehdr *head)
 	printf("  %-36s", "OS/ABI:");
 	switch (head->e_ident[EI_OSABI])
 	{
-	case ELFOSABI_SYSV:
+	case ELFOSABI_NONE:
 		printf("UNIX - System V\n");
 		break;
 	case ELFOSABI_HPUX:
@@ -150,6 +149,12 @@ void printABI(Elf32_Ehdr *head)
 		break;
 	case ELFOSABI_TRU64:
 		printf("UNIX - Tru64\n");
+		break;
+	case ELFOSABI_ARM:
+		printf("ARM\n");
+		break;
+	case ELFOSABI_STANDALONE:
+		printf("Stand-alone APP\n");
 		break;
 	default:
 		printf("<unknown: %02x>\n", head->e_ident[EI_OSABI]);
