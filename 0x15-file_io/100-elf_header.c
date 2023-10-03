@@ -170,6 +170,8 @@ void printABI(Elf32_Ehdr *head)
  */
 void printType_Addr32(Elf32_Ehdr *head)
 {
+	if (head->e_ident[EI_DATA] == ELFDATA2MSB)
+		head->e_type >>= 8;
 	printf("  %-36s", "Type:");
 	if (head->e_type == ET_REL)
 		printf("REL (Relocatable file)\n");
@@ -179,8 +181,10 @@ void printType_Addr32(Elf32_Ehdr *head)
 		printf("DYN (Shared object file)\n");
 	else if (head->e_type == ET_CORE)
 		printf("CORE (Core file)\n");
+	else if (head->e_type == ET_NONE)
+		printf("NONE (None)\n");
 	else
-		printf("NONE <unknown>: %02x\n",  head->e_type);
+		printf("<unknown: %02x>\n",  head->e_type);
 	printf("  %-36s0x%X\n", "Entry point address:", head->e_entry);
 }
 /**
