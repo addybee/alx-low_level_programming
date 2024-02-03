@@ -11,9 +11,9 @@
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int index;
-	hash_node_t *head, *temp;
+	hash_node_t *head, *temp = NULL;
 
-	if (!ht || !key || strlen(key) <= 0)
+	if (!ht || !key || strlen(key) <= 0 || *key <= 0)
 	{
 		return (0);
 	}
@@ -54,7 +54,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 hash_node_t *add_node(hash_node_t **head, const char *key, const char *value)
 {
 	hash_node_t *new;
-	char *temp_key, *temp_value;
+	char *temp_key = NULL, *temp_value = NULL;
 
 	if (key == NULL || head == NULL || !value)
 		return (NULL);
