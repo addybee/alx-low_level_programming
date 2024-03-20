@@ -1,0 +1,7 @@
+.PHONY: school clean
+all: school #target all
+
+school: school.c
+	gcc main.c school.c  -o school
+clean:
+	rm -f school
