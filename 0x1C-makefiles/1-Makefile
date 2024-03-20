@@ -1,0 +1,14 @@
+#declare variables CC, SRC
+#CC: the compiler to be used
+#SRC: the .c files
+
+CC := gcc
+SRC := main.c school.c
+
+.PHONY: school clean
+all: school #target all
+
+school: $(SRC)
+	$(CC) $(SRC) -o school
+clean:
+	rm -f school
