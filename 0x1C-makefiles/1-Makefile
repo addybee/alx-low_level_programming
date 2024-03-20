@@ -1,5 +1,9 @@
+#declare variables CC, SRC
+#CC: the compiler to be used
+#SRC: the .c files
+
 CC := gcc
-SRC := $(wildcard *.c)
+SRC := main.c school.c
 
 all: $(SRC) #target all
 	$(CC) $(SRC) -o school
