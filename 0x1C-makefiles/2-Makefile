@@ -15,10 +15,7 @@ SRC := main.c school.c
 OBJ := main.o school.o
 NAME := school
 
-.PHONY: school clean
-all: school #target all
-
-school: $(OBJ)
+all: $(OBJ)  #target all
 	$(CC) $(OBJ) -o $(NAME)
 
 clean:

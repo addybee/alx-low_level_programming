@@ -5,10 +5,7 @@
 CC := gcc
 SRC := $(wildcard *.c)
 
-.PHONY: school clean
-all: school #target all
-
-school: $(SRC)
+all: $(SRC) #target all
 	$(CC) $(SRC) -o school
 clean:
 	rm -f school
