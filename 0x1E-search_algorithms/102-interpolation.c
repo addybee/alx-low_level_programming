@@ -6,7 +6,8 @@ void print_number(int n);
 void _puts(char *str);
 
 /**
- * interpolation_search - Searches for a value in an array using jump search algorithm.
+ * interpolation_search - Searches for a value in an array using
+ * interpolation search algorithm.
  *
  * @array: Pointer to the first element of the array to search.
  * @size: Number of elements in the array.
@@ -25,7 +26,10 @@ int interpolation_search(int *array, size_t size, int value)
 	high = size - 1;
 	while (low <= high && value >= array[low] && value <= array[high])
 	{
-		size_t pos = low + (((double)(high - low) / (array[high] - array[low])) * (value - array[low]));
+		size_t pos;
+
+		pos = ((double)(high - low) / (array[high] - array[low]));
+		pos = low + (pos * (value - array[low]));
 		/* Print value being checked */
 		_puts("Value checked array[");
 		print_number(pos);
