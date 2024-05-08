@@ -18,7 +18,7 @@ int jump_search(int *array, size_t size, int value)
 {
 	int step, prev, i;
 	/* Check if array is NULL or empty */
-	if (array == NULL || size == 0)
+	if (array == NULL)
 		return (-1);
 
 	/* Calculate the step size */
