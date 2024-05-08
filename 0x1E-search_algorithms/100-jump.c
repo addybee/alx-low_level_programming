@@ -17,8 +17,9 @@ void _puts(char *str);
 int jump_search(int *array, size_t size, int value)
 {
 	int step, prev, i;
+
 	/* Check if array is NULL or empty */
-	if (array == NULL)
+	if (array == NULL || size == 0)
 		return (-1);
 
 	/* Calculate the step size */
@@ -27,7 +28,7 @@ int jump_search(int *array, size_t size, int value)
 	/* Initialize previous index */
 	prev = 0;
 
-	/** Perform jump search */
+	/* Perform jump search */
 	while (array[prev] < value)
 	{
 		int jump;
@@ -41,7 +42,9 @@ int jump_search(int *array, size_t size, int value)
 		_putchar('\n');
 
 		/* Calculate the jump index */
-		jump = fmin(size - 1, prev + step);
+		jump = prev + step;
+		if (jump >= (int)size)
+			jump = size - 1;
 
 		/* Check if value is within the block or if no progress is made */
 		if (array[jump] >= value || jump == prev)
@@ -49,7 +52,7 @@ int jump_search(int *array, size_t size, int value)
 			_puts("Value found between indexes [");
 			print_number(prev);
 			_puts("] and [");
-			print_number(prev + step);
+			print_number(jump);
 			_putchar(']');
 			_putchar('\n');
 			break;
@@ -60,7 +63,7 @@ int jump_search(int *array, size_t size, int value)
 	}
 
 	/* Perform linear search within the block */
-	for (i = prev; i <= fmin(size - 1, prev + step); i++)
+	for (i = prev; i <= prev + step && i < (int)size; i++)
 	{
 		/* Print value being checked */
 		_puts("Value checked array[");
@@ -74,7 +77,7 @@ int jump_search(int *array, size_t size, int value)
 			return (i);
 	}
 
-	/** Return -1 if value is not found */
+	/* Return -1 if value is not found */
 	return (-1);
 }
 
