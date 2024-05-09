@@ -3,6 +3,7 @@
 int advanced_binary_h(int *array, int l, int size, int value);
 void print_number(int n);
 void _putchar(char x);
+void print_array(int *array, int l, int r);
 
 /**
  * advanced_binary - Searches for a value in an array using advanced binary
@@ -17,7 +18,7 @@ void _putchar(char x);
 int advanced_binary(int *array, size_t size, int value)
 {
 	int left = 0;
-	int right = (int)size;
+	int right = (int)size - 1;
 
 	/* Check if array is NULL */
 	if (array == NULL)
@@ -39,43 +40,35 @@ int advanced_binary(int *array, size_t size, int value)
  */
 int advanced_binary_h(int *array, int l, int size, int value)
 {
-	int left = l;
+	int left = l, m;
 	int right = size;
 
-	/* Iterate through the array */
-	if (left < right)
+	if (left >= right)
 	{
-		int i = 0;
-		int m = (left + right) / 2;
-
-		/* Print value being checked */
-		write(1, "Searching in array: ", 20);
-		/* Loop through the array from index 'l' to index 'r' */
-		for (i = left; i < right; i++)
+		if (array[left] != value)
 		{
-			/* Print the element at index 'i' */
-			print_number(array[i]);
-
-			/* If 'i' is not the last index, print a comma and space */
-			if (i != (right - 1))
-				write(1, ", ", 2);
+			/* Print value being checked */
+			write(1, "Searching in array: ", 20);
+			print_array(array, left, (right + 1));
+			_putchar('\n');
+			return (-1);
 		}
-		_putchar('\n');
-
-		/* If value is found, return its index */
-		if (array[m] < value)
-			return (advanced_binary_h(array, m + 1, right, value));
-		if (array[m] > value)
-			return (advanced_binary_h(array, left, m, value));
-		if (array[m] == value)
-		{
-			if (array[m - 1] == value)
-				return (m - 1);
-			return (m);
-		}
+		return (left);
 	}
-	/* Value not found */
-	return (-1);
+
+	m = left + (right - left) / 2;
+
+	/* Print value being checked */
+	write(1, "Searching in array: ", 20);
+	print_array(array, left, (right + 1));
+	_putchar('\n');
+
+	/* If value is found, return its index */
+	if (array[m] < value)
+		return (advanced_binary_h(array, m + 1, right, value));
+	else
+		return (advanced_binary_h(array, left, m, value));
+
 }
 
 /**
@@ -121,4 +114,30 @@ void print_number(int n)
 void _putchar(char x)
 {
 	write(STDOUT_FILENO, &x, 1);
+}
+
+/**
+ * print_array - Prints the elements of an array within a specified range.
+ *
+ * @array: Pointer to the array.
+ * @l: Starting index of the range.
+ * @r: Ending index of the range.
+ */
+void print_array(int *array, int l, int r)
+{
+	int i;
+
+	/* Loop through the array from index 'l' to index 'r' */
+	for (i = l; i < r; i++)
+	{
+		/* Print the element at index 'i' */
+		print_number(array[i]);
+
+		/* If 'i' is not the last index, print a comma and space */
+		if (i != (r - 1))
+		{
+			_putchar(',');
+			_putchar(' ');
+		}
+	}
 }
