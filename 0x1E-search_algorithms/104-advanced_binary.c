@@ -43,7 +43,6 @@ int advanced_binary_h(int *array, int l, int size, int value)
 	int left = l;
 	int right = size;
 
-
 	/* Iterate through the array */
 	if (left < right)
 	{
@@ -75,7 +74,6 @@ int advanced_binary_h(int *array, int l, int size, int value)
 				return (m - 1);
 			return (m);
 		}
-
 	}
 	/* Value not found */
 	return (-1);
