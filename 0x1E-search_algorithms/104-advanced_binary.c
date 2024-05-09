@@ -1,5 +1,5 @@
 #include "search_algos.h"
-
+#include <stdio.h>
 int advanced_binary_h(int *array, int l, int size, int value);
 void print_number(int n);
 void _putchar(char x);
@@ -48,9 +48,7 @@ int advanced_binary_h(int *array, int l, int size, int value)
 		if (array[left] != value)
 		{
 			/* Print value being checked */
-			write(1, "Searching in array: ", 20);
 			print_array(array, left, (right + 1));
-			_putchar('\n');
 			return (-1);
 		}
 		return (left);
@@ -59,9 +57,7 @@ int advanced_binary_h(int *array, int l, int size, int value)
 	m = left + (right - left) / 2;
 
 	/* Print value being checked */
-	write(1, "Searching in array: ", 20);
 	print_array(array, left, (right + 1));
-	_putchar('\n');
 
 	/* If value is found, return its index */
 	if (array[m] < value)
@@ -93,17 +89,13 @@ void print_array(int *array, int l, int r)
 {
 	int i;
 
-	/* Loop through the array from index 'l' to index 'r' */
+	printf("Searching in array: ");
 	for (i = l; i < r; i++)
 	{
-		/* Print the element at index 'i' */
 		printf("%d", array[i]);
-
-		/* If 'i' is not the last index, print a comma and space */
-		if (i != (r - 1))
-		{
-			_putchar(',');
-			_putchar(' ');
-		}
+		if (i == (r - 1))
+			continue;
+		printf(", ");
 	}
+	putchar('\n');
 }
