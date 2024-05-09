@@ -18,18 +18,20 @@ void _puts(char *str);
 int interpolation_search(int *array, size_t size, int value)
 {
 	int low, high;
+	size_t pos;
 
 	/* Check if array is NULL or empty */
 	if (array == NULL || size == 0)
 		return (-1);
 	low = 0;
 	high = size - 1;
+	pos = ((double)(high - low) * (value - array[low]));
+	pos = low + (int)(pos / (array[high] - array[low]));
+	print_number(pos);
 	while (low <= high && value >= array[low] && value <= array[high])
 	{
-		size_t pos;
-
-		pos = ((double)(high - low) / (array[high] - array[low]));
-		pos = low + (pos * (value - array[low]));
+		pos = ((double)(high - low) * (value - array[low]));
+		pos = low + (pos / (array[high] - array[low]));
 		/* Print value being checked */
 		_puts("Value checked array[");
 		print_number(pos);
@@ -46,7 +48,9 @@ int interpolation_search(int *array, size_t size, int value)
 	}
 
 	/* Print out of range index */
-	_puts("Value checked array[2109] is out of range\n");
+	_puts("Value checked array[");
+	print_number(pos);
+	_puts("] is out of range\n");
 	/* Return -1 if value is not found */
 	return (-1);
 }
