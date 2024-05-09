@@ -38,8 +38,7 @@ int jump_search(int *array, size_t size, int value)
 		print_number(prev);
 		_puts("] = [");
 		print_number(array[prev]);
-		_putchar(']');
-		_putchar('\n');
+		_puts("]\n");
 
 		/* Calculate the jump index */
 		jump = prev + step;
@@ -48,20 +47,17 @@ int jump_search(int *array, size_t size, int value)
 
 		/* Check if value is within the block or if no progress is made */
 		if (array[jump] >= value || jump == prev)
-		{
-			_puts("Value found between indexes [");
-			print_number(prev);
-			_puts("] and [");
-			print_number(jump);
-			_putchar(']');
-			_putchar('\n');
 			break;
-		}
 
 		/* Update previous index */
 		prev += step;
 	}
-
+	_puts("Value found between indexes [");
+	print_number(prev);
+	_puts("] and [");
+	print_number(prev + step);
+	_putchar(']');
+	_putchar('\n');
 	/* Perform linear search within the block */
 	for (i = prev; i <= prev + step && i < (int)size; i++)
 	{
@@ -140,4 +136,44 @@ void _puts(char *str)
 		_putchar(*str);
 		str++;
 	}
+}
+
+/**
+ * linear_search_jump - Searches for a value in an array using linear search
+ * algorithm.
+ *
+ * @array: Pointer to the first element of the array to search.
+ * @size: Number of elements in the array.
+ * @value: Value to search for.
+ * @first_idx: index of the first element in the array.
+ *
+ * Return: Index of the value if found, otherwise -1.
+ */
+int linear_search_jump(int *array, size_t first_idx, size_t size, int value)
+{
+	int i;
+
+	/* Check if array is NULL */
+	if (array == NULL)
+		return (-1);
+
+	/* Iterate through the array */
+	for (i = first_idx; i < (int)size; i++)
+	{
+		/* Print value being checked */
+		_puts("Value checked array[");
+		print_number(i);
+		_puts("] = [");
+		print_number(array[i]);
+		_putchar(']');
+		_putchar('\n');
+
+		/* If value is found, return its index */
+		if (array[i] == value)
+		{
+			return (i);
+		}
+	}
+	/* Value not found */
+	return (-1);
 }
