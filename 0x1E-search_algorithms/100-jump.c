@@ -35,19 +35,23 @@ int jump_search(int *array, size_t size, int value)
 	print_number(array[prev]);
 	_puts("]\n");
 	/* Perform jump search */
-	while (array[min(step, size)] < value)
+	while (array[min(step, (size - 1))] < value)
 	{
 		prev = step;
 		step += sqrt(size);
 		/* Print value being checked */
 		_puts("Value checked array[");
-		print_number(prev);
+		print_number(min(prev, (size - 1)));
 		_puts("] = [");
-		print_number(array[prev]);
+		print_number(array[min(prev, (size - 1))]);
 		_puts("]\n");
 
 		if (prev >= (int)size)
-			return (-1);
+		{
+			step = prev;
+			prev = step - (int)sqrt(size);
+			break;
+		}
 	}
 	_puts("Value found between indexes [");
 	print_number(prev);
