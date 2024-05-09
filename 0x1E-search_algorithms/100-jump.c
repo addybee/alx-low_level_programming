@@ -4,6 +4,7 @@
 void _putchar(char x);
 void print_number(int n);
 void _puts(char *str);
+int min(int a, int b);
 
 /**
  * jump_search - Searches for a value in an array using jump search algorithm.
@@ -27,12 +28,17 @@ int jump_search(int *array, size_t size, int value)
 
 	/* Initialize previous index */
 	prev = 0;
-
+	/* Print value being checked */
+	_puts("Value checked array[");
+	print_number(prev);
+	_puts("] = [");
+	print_number(array[prev]);
+	_puts("]\n");
 	/* Perform jump search */
-	while (array[prev] < value)
+	while (array[min(step, size)] < value)
 	{
-		int jump;
-
+		prev = step;
+		step += sqrt(size);
 		/* Print value being checked */
 		_puts("Value checked array[");
 		print_number(prev);
@@ -40,26 +46,16 @@ int jump_search(int *array, size_t size, int value)
 		print_number(array[prev]);
 		_puts("]\n");
 
-		/* Calculate the jump index */
-		jump = prev + step;
-		if (jump >= (int)size)
-			jump = size - 1;
-
-		/* Check if value is within the block or if no progress is made */
-		if (array[jump] >= value || jump == prev)
-			break;
-
-		/* Update previous index */
-		prev += step;
+		if (prev >= (int)size)
+			return (-1);
 	}
 	_puts("Value found between indexes [");
 	print_number(prev);
 	_puts("] and [");
-	print_number(prev + step);
-	_putchar(']');
-	_putchar('\n');
+	print_number(step);
+	_puts("]\n");
 	/* Perform linear search within the block */
-	for (i = prev; i <= prev + step && i < (int)size; i++)
+	for (i = prev; i < min(step + 1, size); i++)
 	{
 		/* Print value being checked */
 		_puts("Value checked array[");
@@ -68,11 +64,13 @@ int jump_search(int *array, size_t size, int value)
 		print_number(array[i]);
 		_putchar(']');
 		_putchar('\n');
-		/* Check if value is found */
-		if (array[i] == value)
-			return (i);
-	}
 
+		/* If value is found, return its index */
+		if (array[i] == value)
+		{
+			return (i);
+		}
+	}
 	/* Return -1 if value is not found */
 	return (-1);
 }
@@ -136,4 +134,21 @@ void _puts(char *str)
 		_putchar(*str);
 		str++;
 	}
+}
+
+/**
+ * min - Returns the minimum of two integers.
+ *
+ * @a: First integer.
+ * @b: Second integer.
+ *
+ * Return: The minimum of @a and @b.
+ */
+int min(int a, int b)
+{
+	/* Check if b is less than a */
+	if (b > a)
+		return (a); /* Return a if b is greater */
+	else
+		return (b); /* Return b if b is less than or equal to a */
 }
