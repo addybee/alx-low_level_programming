@@ -2,7 +2,6 @@
 
 int advanced_binary_h(int *array, int l, int size, int value);
 void print_number(int n);
-void _puts(char *str);
 void _putchar(char x);
 
 /**
@@ -50,7 +49,7 @@ int advanced_binary_h(int *array, int l, int size, int value)
 		int m = (left + right) / 2;
 
 		/* Print value being checked */
-		_puts("Searching in array: ");
+		write(1, "Searching in array: ", 20);
 		/* Loop through the array from index 'l' to index 'r' */
 		for (i = left; i < right; i++)
 		{
@@ -59,7 +58,7 @@ int advanced_binary_h(int *array, int l, int size, int value)
 
 			/* If 'i' is not the last index, print a comma and space */
 			if (i != (right - 1))
-				_puts(", ");
+				write(1, ", ", 2);
 		}
 		_putchar('\n');
 
@@ -110,21 +109,6 @@ void print_number(int n)
 			div *= 10;
 		_putchar('0' + (n / div));
 		n %= div;
-	}
-}
-
-/**
- * _puts - Prints a string, without a new line, to stdout.
- * @str: Pointer to the string to be printed.
- *
- * Return: Nothing.
- */
-void _puts(char *str)
-{
-	while (*str != '\0')
-	{
-		_putchar(*str);
-		str++;
 	}
 }
 
