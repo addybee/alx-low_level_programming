@@ -72,40 +72,6 @@ int advanced_binary_h(int *array, int l, int size, int value)
 }
 
 /**
- * print_number - Prints an integer.
- * @n: The integer to be printed.
- *
- * Return: Nothing.
- */
-void print_number(int n)
-{
-	int digit, div, t;
-
-	if (n < 0)
-	{
-		_putchar('-');
-		n *= -1;
-	}
-
-	t = n;
-	digit = 1;
-
-	/* Count the number of digits */
-	while (t /= 10)
-		digit++;
-
-	/* Print each digit */
-	while (digit--)
-	{
-		div = 1;
-		for (t = 1; t <= digit; t++)
-			div *= 10;
-		_putchar('0' + (n / div));
-		n %= div;
-	}
-}
-
-/**
  * _putchar - Displays a character on standard output.
  * @x: The character to be printed.
  *
@@ -131,7 +97,7 @@ void print_array(int *array, int l, int r)
 	for (i = l; i < r; i++)
 	{
 		/* Print the element at index 'i' */
-		print_number(array[i]);
+		printf("%d", array[i]);
 
 		/* If 'i' is not the last index, print a comma and space */
 		if (i != (r - 1))
