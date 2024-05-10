@@ -69,7 +69,7 @@ listint_t *jump_list_help(listint_t **array, size_t size, int value)
 			break;
 		}
 		/* Print value being checked */
-		printf("Value checked array[%lu] = [%d]\n",
+		printf("Value checked array[%d] = [%d]\n",
 		prev, array[prev]->n);
 	}
 	printf("Value found between indexes [%d] and [%d]\n", prev, step);
