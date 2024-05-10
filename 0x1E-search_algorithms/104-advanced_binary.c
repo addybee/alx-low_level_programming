@@ -2,7 +2,6 @@
 #include <stdio.h>
 int advanced_binary_h(int *array, int l, int size, int value);
 void print_number(int n);
-void _putchar(char x);
 void print_array(int *array, int l, int r);
 
 /**
@@ -65,17 +64,6 @@ int advanced_binary_h(int *array, int l, int size, int value)
 	else
 		return (advanced_binary_h(array, left, m, value));
 
-}
-
-/**
- * _putchar - Displays a character on standard output.
- * @x: The character to be printed.
- *
- * Return: 0 when successful.
- */
-void _putchar(char x)
-{
-	write(STDOUT_FILENO, &x, 1);
 }
 
 /**
